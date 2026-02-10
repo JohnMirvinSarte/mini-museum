@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Love Letter for You</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bgMusic" volume="0.3">
+        <source src="songs/song1.mp3" type="audio/mpeg">
+        <source src="songs/song2.mp3" type="audio/mpeg">
+        <source src="songs/song3.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-header">
+            <div class="now-playing">♫ Now Playing</div>
+        </div>
+        <div class="song-info">
+            <div class="song-title" id="songTitle">Wi$h Li$t (Acoustic Version)</div>
+            <div class="song-artist" id="songArtist">Taylor Swift</div>
+        </div>
+        <div class="player-controls">
+            <button class="control-btn" id="prevBtn" title="Previous">
+                <span>⏮</span>
+            </button>
+            <button class="control-btn play-pause" id="playPauseBtn" title="Play/Pause">
+                <span id="playPauseIcon">▶</span>
+            </button>
+            <button class="control-btn" id="nextBtn" title="Next">
+                <span>⏭</span>
+            </button>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+        </div>
+        <div class="volume-control">
+            <span class="volume-icon">🔊</span>
+            <input type="range" min="0" max="100" value="25" class="volume-slider" id="volumeSlider">
+        </div>
+    </div>
+    
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Map Toggle Button -->
+    <button class="map-toggle-btn" id="mapToggleBtn" title="View Memory Map">
+        <span class="map-icon">📍</span>
+        <span class="map-btn-text">Our Journey Map</span>
+    </button>
+    
+    <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="wrapper">
+            <div class="lid one"></div>
+            <div class="lid two"></div>
+            <div class="envelope"></div>
+            <div class="letter">
+                <p>❤</p>
+            </div>
+        </div>
+        <p class="tap-hint">Click to open</p>
+    </div>
+
+    <!-- Slideshow Container -->
+    <div class="slideshow-container" id="slideshowContainer">
+        <div class="slideshow-wrapper">
+            <div class="slide fade" id="slide0">
+                <img src="pictures/1.jpg" alt="Memory 1">
+            </div>
+            <div class="slide fade" id="slide1">
+                <img src="pictures/2.jpg" alt="Memory 2">
+            </div>
+            <div class="slide fade" id="slide2">
+                <img src="pictures/3.jpg" alt="Memory 3">
+            </div>
+            <div class="slide fade" id="slide3">
+                <img src="pictures/4.jpg" alt="Memory 4">
+            </div>
+            <div class="slide fade" id="slide4">
+                <img src="pictures/5.jpg" alt="Memory 5">
+            </div>
+            <div class="slide fade" id="slide5">
+                <img src="pictures/6.jpg" alt="Memory 6">
+            </div>
+            <div class="slide fade" id="slide6">
+                <img src="pictures/7.jpg" alt="Memory 7">
+            </div>
+            <div class="slide fade" id="slide7">
+                <img src="pictures/8.jpg" alt="Memory 8">
+            </div>
+            <div class="slide fade" id="slide8">
+                <img src="pictures/9.jpg" alt="Memory 9">
+            </div>
+            <div class="slide fade" id="slide9">
+                <img src="pictures/10.jpg" alt="Memory 10">
+            </div>
+            <div class="slide fade" id="slide10">
+                <img src="pictures/11.jpg" alt="Memory 11">
+                <div class="slide-caption">Our Beautiful Memories</div>
+            </div>
+            <div class="slideshow-dots">
+                <span class="dot" onclick="currentSlide(10)"></span>
+                <span class="dot" onclick="currentSlide(9)"></span>
+                <span class="dot" onclick="currentSlide(8)"></span>
+                <span class="dot" onclick="currentSlide(7)"></span>
+                <span class="dot" onclick="currentSlide(6)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(0)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Map Container -->
+    <div class="memory-map-container" id="memoryMapContainer">
+        <button class="map-close-btn" id="mapCloseBtn" title="Close Map">
+            <span>✕</span>
+        </button>
+        <div class="map-header">
+            <h2 class="map-title">Our Journey Together</h2>
+            <p class="map-subtitle">Places we've created beautiful memories 🌍</p>
+        </div>
+        <div id="map" class="map-canvas"></div>
+        <div class="map-legend">
+            <div class="legend-item">
+                <span class="legend-icon">❤️</span>
+                <span class="legend-text">Special Moments</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-icon">📍</span>
+                <span class="legend-text">Click markers for details</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="letter-container" id="letterContainer">
+        <div class="letter-paper">
+            <div class="letter-header">
+                <div class="wax-seal">
+                    <span class="heart-seal">♥</span>
+                </div>
+            </div>
+
+            <div class="letter-content">
+                <h1 class="letter-title">To My Dearest Love</h1>
+                
+                <p class="letter-date">Valentine's Day 2026</p>
+
+                <div class="letter-body">
+                    <p class="letter-paragraph">My Darling,</p>
+                    
+                    <p class="letter-paragraph">
+                        In a world of fleeting moments, you are my forever. Every day with you 
+                        feels like a page from a beautiful story—one I never want to end.
+                    </p>
+                    
+                    <p class="letter-paragraph">
+                        Your smile is the sunshine that brightens my darkest days, your laughter 
+                        is the melody that fills my heart with joy, and your love is the anchor 
+                        that keeps me grounded through life's storms.
+                    </p>
+                    
+                    <p class="letter-paragraph">
+                        This mini museum is just a small token of the infinite love I have for you. 
+                        Each piece represents a memory, a moment, a reason why I fall in love with 
+                        you all over again.
+                    </p>
+                    
+                    <p class="letter-paragraph">
+                        Thank you for being my partner, my best friend, my everything. You make 
+                        ordinary moments extraordinary, and life with you is the greatest adventure 
+                        I could ever ask for.
+                    </p>
+                    
+                    <p class="letter-paragraph">
+                        Happy Valentine's Day, my love. Today and always, my heart belongs to you.
+                    </p>
+                    
+                    <div class="signature">
+                        <p class="letter-closing">Forever yours,</p>
+                        <p class="letter-name">Your Loving Partner</p>
+                        <div class="heart-signature">♥</div>
+                    </div>
+                </div>
+
+                <div class="decorative-border"></div>
+            </div>
+
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration top-right"></div>
+            <div class="corner-decoration bottom-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+        </div>
+
+        <button class="close-button" id="closeButton">Close Letter</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
