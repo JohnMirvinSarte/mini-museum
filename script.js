@@ -1,3 +1,65 @@
+// Password Protection System
+const correctPassword = "082702"; // Change this to your desired password
+const passwordOverlay = document.getElementById('passwordOverlay');
+const passwordInput = document.getElementById('passwordInput');
+const unlockBtn = document.getElementById('unlockBtn');
+const errorMessage = document.getElementById('errorMessage');
+
+// Add locked class to body initially
+document.body.classList.add('locked');
+
+// Check if already unlocked in this session
+if (sessionStorage.getItem('museumUnlocked') === 'true') {
+    unlockMuseum();
+}
+
+function unlockMuseum() {
+    passwordOverlay.style.display = 'none';
+    document.body.classList.remove('locked');
+    
+    // Show all hidden elements
+    document.getElementById('heartsContainer').style.display = 'block';
+    document.getElementById('rosePetalsContainer').style.display = 'block';
+    document.getElementById('themeToggleBtn').style.display = 'flex';
+    document.getElementById('mapToggleBtn').style.display = 'flex';
+    document.getElementById('envelopeWrapper').style.display = 'block';
+    document.getElementById('musicPlayer').style.display = 'block';
+    
+    // Save unlock state for this session
+    sessionStorage.setItem('museumUnlocked', 'true');
+    
+    // Initialize music and other features
+    setTimeout(() => {
+        startMusic();
+    }, 500);
+}
+
+function checkPassword() {
+    const enteredPassword = passwordInput.value;
+    
+    if (enteredPassword === correctPassword) {
+        errorMessage.style.color = '#00ff00';
+        errorMessage.textContent = '✓ ACCESS GRANTED - Welcome Back';
+        setTimeout(unlockMuseum, 1000);
+    } else {
+        errorMessage.style.color = '#ffff00';
+        errorMessage.textContent = '✗ INCORRECT PASSWORD - ACCESS DENIED';
+        passwordInput.value = '';
+        passwordInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            passwordInput.style.animation = '';
+        }, 500);
+    }
+}
+
+unlockBtn.addEventListener('click', checkPassword);
+
+passwordInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        checkPassword();
+    }
+});
+
 // Background Music Management
 let currentSongIndex = 0;
 const songs = [
@@ -484,14 +546,14 @@ const memoryLocations = [
         name: "Bicol University Polangui",
         coords: [13.296263, 123.484147], // Polangui, Albay
         description: "Mirvin's College Graduation",
-        date: "07:00 PM, June 27, 2025",
+        date: "07:30 PM, June 27, 2025",
         image: "pictures/24.jpg"
     },
     {
         name: "Uncle Wilsons Farm at Gamot Polangui Albay",
         coords: [13.326277, 123.510726], // Gamot, Polangui, Albay
         description: "Visiting Uncle Wilsons Farm",
-        date: "07:43 AM, June 28, 2025",
+        date: "June 28, 2025",
         image: "pictures/25.jpg"
     },
     {
@@ -936,4 +998,3 @@ window.addEventListener('orientationchange', () => {
         }
     }, 300);
 });
-
