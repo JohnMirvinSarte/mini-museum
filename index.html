@@ -12,6 +12,48 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
+    <!-- Password Protection Overlay -->
+    <div class="password-overlay" id="passwordOverlay">
+        <div class="password-container">
+            <div class="warning-header">
+                <div class="skull-icon">☠️</div>
+                <h1 class="warning-title">⚠️ UNAUTHORIZED ACCESS DETECTED ⚠️</h1>
+            </div>
+            
+            <div class="threat-message">
+                <p class="threat-text">TO THE THIEF WHO STOLE THIS MUSEUM:</p>
+                <p class="threat-warning">
+                    You have committed a SERIOUS OFFENSE by stealing this personal property. 
+                    This website contains PROTECTED CONTENT.
+                </p>
+                <div class="legal-notice">
+                    <p>LEGAL CONSEQUENCES:</p>
+                    <ul>
+                        <li>- PNP Law enforcement has been notified</li>
+                        <li>- IP address and location are being exposed and tracked</li>
+                        <li>- Civil and criminal charges will be filed</li>
+                        <li>- Return the property IMMEDIATELY to avoid prosecution</li>
+                    </ul>
+                </div>
+                <p class="final-warning">
+                    RETURN THIS PROPERTY NOW OR FACE THE FULL EXTENT OF THE LAW
+                </p>
+            </div>
+            
+            <div class="password-section">
+                <label for="passwordInput" class="password-label">AUTHORIZED ACCESS ONLY</label>
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter passkey..." autocomplete="off">
+                <button id="unlockBtn" class="unlock-btn">UNLOCK</button>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+            
+            <div class="owner-info">
+                <p>Property of: Arabela A. Castada</p>
+                <p>If found, please return immediately at Blk 30 Lot 41 Tropical Avenue BF International Village</p>
+            </div>
+        </div>
+    </div>
+    
     <!-- Background Music -->
     <audio id="bgMusic" volume="0.3">
         <source src="songs/song1.mp3" type="audio/mpeg">
@@ -20,7 +62,7 @@
     </audio>
     
     <!-- Music Player -->
-    <div class="music-player" id="musicPlayer">
+    <div class="music-player" id="musicPlayer" style="display: none;">
         <button class="minimize-btn" id="minimizeBtn" title="Minimize Player">
             <span class="minimize-icon" id="minimizeIcon">−</span>
         </button>
@@ -57,23 +99,23 @@
         </div>
     </div>
     
-    <div class="hearts-container" id="heartsContainer"></div>
+    <div class="hearts-container" id="heartsContainer" style="display: none;"></div>
     
     <!-- Rose Petal Cursor Trail Container -->
-    <div class="rose-petals-container" id="rosePetalsContainer"></div>
+    <div class="rose-petals-container" id="rosePetalsContainer" style="display: none;"></div>
     
     <!-- Day/Night Mode Toggle -->
-    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode">
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Day/Night Mode" style="display: none;">
         <span class="theme-icon" id="themeIcon">🌙</span>
     </button>
     
     <!-- Map Toggle Button -->
-    <button class="map-toggle-btn" id="mapToggleBtn" title="View Memory Map">
+    <button class="map-toggle-btn" id="mapToggleBtn" title="View Memory Map" style="display: none;">
         <span class="map-icon">📍</span>
         <span class="map-btn-text">Our Journey Map</span>
     </button>
     
-    <div class="envelope-wrapper" id="envelopeWrapper">
+    <div class="envelope-wrapper" id="envelopeWrapper" style="display: none;">
         <div class="wrapper">
             <div class="lid one"></div>
             <div class="lid two"></div>
@@ -130,7 +172,7 @@
                     </p>
                     
                     <p class="letter-paragraph">
-                        Yung mga ngiti at presence mo ay sunshine na parang na ba-brighten ang darkest days ko in the past, your laughter 
+                        Yung mga ngiti at presence mo ay sunshine na ba-brighten ang darkest days ko in the past, your laughter 
                         is the melody that fills my heart with joy, and your love is the anchor 
                         that keeps me grounded through life's storms.
                     </p>
@@ -174,4 +216,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
