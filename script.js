@@ -484,14 +484,14 @@ const memoryLocations = [
         name: "Bicol University Polangui",
         coords: [13.296263, 123.484147], // Polangui, Albay
         description: "Mirvin's College Graduation",
-        date: "07:30 PM, June 27, 2025",
+        date: "07:00 PM, June 27, 2025",
         image: "pictures/24.jpg"
     },
     {
         name: "Uncle Wilsons Farm at Gamot Polangui Albay",
         coords: [13.326277, 123.510726], // Gamot, Polangui, Albay
         description: "Visiting Uncle Wilsons Farm",
-        date: "June 28, 2025",
+        date: "07:43 AM, June 28, 2025",
         image: "pictures/25.jpg"
     },
     {
@@ -936,3 +936,4 @@ window.addEventListener('orientationchange', () => {
         }
     }, 300);
 });
+
