@@ -12,6 +12,238 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Password Protection Overlay Styles */
+.password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: bloodPulse 3s infinite;
+}
+
+@keyframes bloodPulse {
+    0%, 100% { background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%); }
+    50% { background: linear-gradient(135deg, #2a0000 0%, #440000 50%, #2a0000 100%); }
+}
+
+.password-container {
+    background: rgba(20, 0, 0, 0.95);
+    border: 3px solid #ff0000;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 
+        0 0 50px rgba(255, 0, 0, 0.8),
+        0 0 100px rgba(255, 0, 0, 0.5),
+        inset 0 0 50px rgba(255, 0, 0, 0.1);
+    animation: warningGlow 2s infinite;
+}
+
+@keyframes warningGlow {
+    0%, 100% { box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 0 0 100px rgba(255, 0, 0, 0.5), inset 0 0 50px rgba(255, 0, 0, 0.1); }
+    50% { box-shadow: 0 0 80px rgba(255, 0, 0, 1), 0 0 150px rgba(255, 0, 0, 0.8), inset 0 0 80px rgba(255, 0, 0, 0.2); }
+}
+
+.warning-header {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.skull-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.warning-title {
+    color: #ff0000;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    font-family: 'Crimson Text', serif;
+}
+
+.threat-message {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #cc0000;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.threat-text {
+    color: #ff3333;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.threat-warning {
+    color: #ffcccc;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.legal-notice {
+    background: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid #ff0000;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.legal-notice p {
+    color: #ffff00;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.legal-notice ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.legal-notice li {
+    color: #ffcccc;
+    font-size: 15px;
+    margin: 8px 0;
+    padding-left: 10px;
+}
+
+.final-warning {
+    color: #ffff00;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    animation: blink 1s infinite;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.password-section {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.password-label {
+    display: block;
+    color: #ff6666;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.password-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 2px solid #ff0000;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    margin-bottom: 15px;
+    font-family: 'Crimson Text', serif;
+    transition: all 0.3s;
+}
+
+.password-input:focus {
+    outline: none;
+    border-color: #ffff00;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+}
+
+.unlock-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    font-family: 'Crimson Text', serif;
+}
+
+.unlock-btn:hover {
+    background: linear-gradient(135deg, #ff0000 0%, #ff3333 100%);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+.unlock-btn:active {
+    transform: translateY(0);
+}
+
+.error-message {
+    color: #ffff00;
+    font-size: 14px;
+    margin-top: 10px;
+    min-height: 20px;
+    font-weight: bold;
+}
+
+.owner-info {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #660000;
+}
+
+.owner-info p {
+    color: #ff9999;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Hide content until unlocked */
+.locked .music-player,
+.locked .envelope-wrapper,
+.locked .letter-container,
+.locked .theme-toggle-btn,
+.locked .map-toggle-btn,
+.locked .hearts-container,
+.locked .rose-petals-container {
+    display: none !important;
+}
+
 /* Safe area handling for devices with notches */
 @supports (padding: max(0px)) {
     body {
@@ -2352,5 +2584,86 @@ body.night-mode .close-button:hover {
     100% {
         opacity: 0;
         transform: translate(280px, 280px) scale(0.3) rotate(-360deg);
+    }
+}
+
+/* Mobile Responsive Styles for Password Overlay */
+@media (max-width: 768px) {
+    .password-container {
+        padding: 25px;
+        max-width: 95%;
+    }
+    
+    .warning-title {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+    
+    .skull-icon {
+        font-size: 40px;
+    }
+    
+    .threat-text {
+        font-size: 18px;
+    }
+    
+    .threat-warning {
+        font-size: 14px;
+    }
+    
+    .legal-notice p {
+        font-size: 16px;
+    }
+    
+    .legal-notice li {
+        font-size: 13px;
+    }
+    
+    .final-warning {
+        font-size: 16px;
+    }
+    
+    .password-input,
+    .unlock-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .password-container {
+        padding: 20px;
+    }
+    
+    .warning-title {
+        font-size: 16px;
+    }
+    
+    .skull-icon {
+        font-size: 35px;
+    }
+    
+    .threat-text {
+        font-size: 16px;
+    }
+    
+    .threat-warning {
+        font-size: 13px;
+    }
+    
+    .legal-notice {
+        padding: 10px;
+    }
+    
+    .legal-notice p {
+        font-size: 14px;
+    }
+    
+    .legal-notice li {
+        font-size: 12px;
+    }
+    
+    .final-warning {
+        font-size: 14px;
     }
 }
