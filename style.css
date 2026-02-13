@@ -9,6 +9,7 @@ html {
     width: 100%;
     height: 100%;
     position: relative;
+    scroll-behavior: smooth;
 }
 
 /* Safe area handling for devices with notches */
@@ -1420,11 +1421,41 @@ body.night-mode .theme-toggle-btn:hover {
     animation: letterAppear 2s ease-out;
     max-width: 800px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     transform-style: preserve-3d;
+    scroll-behavior: smooth;
 }
 
 .letter-container.show {
     display: block;
+}
+
+/* Custom Scrollbar for Letter Container */
+.letter-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.letter-container::-webkit-scrollbar-track {
+    background: rgba(212, 196, 168, 0.2);
+    border-radius: 10px;
+}
+
+.letter-container::-webkit-scrollbar-thumb {
+    background: rgba(180, 153, 104, 0.6);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.letter-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(180, 153, 104, 0.8);
+}
+
+/* For Firefox */
+.letter-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(180, 153, 104, 0.6) rgba(212, 196, 168, 0.2);
 }
 
 @keyframes letterAppear {
